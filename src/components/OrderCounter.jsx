@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin-left: 7rem;
+  margin-left: 0rem;
 `;
 
 const Button = styled.button`
@@ -21,13 +21,9 @@ export default function OrderCounter({ orderCount, setOrderCount }) {
   };
   return (
     <Container>
-      <Button className="barlow-regular" onClick={decreaseCount}>
-        −
-      </Button>
-      <span className="barlow-regular">{orderCount}</span>
-      <Button className="barlow-regular" onClick={increaseCount}>
-        +
-      </Button>
+      <Button onClick={decreaseCount}>−</Button>
+      <span>{orderCount}</span>
+      <Button onClick={increaseCount}>+</Button>
     </Container>
   );
 }

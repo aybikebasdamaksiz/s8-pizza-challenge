@@ -19,7 +19,6 @@ const toppingsList = [
 
 const ToppingsContainer = styled.div`
   max-width: 40rem;
-  margin: 0 auto;
   padding: 1rem;
 `;
 
@@ -60,14 +59,17 @@ const CustomCheckbox = styled.span`
   width: 18px;
   height: 18px;
   margin-right: 8px;
-  border: 2px solid #5f5f5f;
+  background-color: #faf7f2;
+  border: 2px solid #faf7f2;
   border-radius: 4px;
   transition: all 0.2s;
 
-  ${HiddenCheckbox}:checked + & {
-    background-color: #ce2829;
-    border-color: #ce2829;
-  }
+  ${({ $checked }) =>
+    $checked &&
+    `
+    background-color: #fdc913;
+    border-color: #fdc913;
+  `}
 
   ${HiddenCheckbox}:checked + &::after {
     content: "✓";
@@ -75,7 +77,7 @@ const CustomCheckbox = styled.span`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: black;
     font-size: 12px;
   }
 `;
@@ -89,20 +91,38 @@ const ToppingLabel = styled.label`
   font-size: 0.8rem;
 
   &:hover ${CustomCheckbox} {
-    border-color: #ce2829;
+    border-color: #fdc913;
   }
+
+  /* Seçim limiti aşıldığında stil değişimi */
+  ${(props) =>
+    props.disabled &&
+    `
+    color: #a9a9a9;
+    cursor: not-allowed;
+    &:hover ${CustomCheckbox} {
+      border-color: #d3d3d3;
+    }
+  `}
 `;
+PizzaToppings.defaultProps = {
+  selectedToppings: [],
+  setSelectedToppings: () => {},
+};
 
 export default function PizzaToppings({
-  selectedToppings,
-  setSelectedToppings,
+  selectedToppings = [],
+  setSelectedToppings = () => {},
 }) {
   const toggleTopping = (topping) => {
-    if (selectedToppings.includes(topping)) {
-      setSelectedToppings(selectedToppings.filter((t) => t !== topping));
-    } else if (selectedToppings.length < 10) {
-      setSelectedToppings([...selectedToppings, topping]);
-    }
+    setSelectedToppings((prevToppings) => {
+      if (prevToppings.includes(topping)) {
+        return prevToppings.filter((t) => t !== topping);
+      } else if (prevToppings.length < 10) {
+        return [...prevToppings, topping];
+      }
+      return prevToppings;
+    });
   };
 
   return (
@@ -114,7 +134,12 @@ export default function PizzaToppings({
       <ToppingsGrid>
         {toppingsList.map((topping) => (
           <ToppingItem key={topping}>
-            <ToppingLabel>
+            <ToppingLabel
+              disabled={
+                !selectedToppings.includes(topping) &&
+                selectedToppings.length >= 10
+              }
+            >
               <HiddenCheckbox
                 type="checkbox"
                 checked={selectedToppings.includes(topping)}
@@ -124,7 +149,7 @@ export default function PizzaToppings({
                   selectedToppings.length >= 10
                 }
               />
-              <CustomCheckbox />
+              <CustomCheckbox $checked={selectedToppings.includes(topping)} />
               <span>{topping}</span>
             </ToppingLabel>
           </ToppingItem>

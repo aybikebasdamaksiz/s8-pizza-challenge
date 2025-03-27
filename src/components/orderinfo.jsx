@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Container = styled.div`
   max-width: 40rem;
   margin: 0 auto;
-  padding-left: 8rem;
 `;
 
 const Baslik = styled.h1`
@@ -31,10 +30,10 @@ export default function OrderInfo({ pizzaBasePrice }) {
     <Container>
       <Baslik>Position Absolute Acı Pizza</Baslik>
       <PizzaInfo>
-        <p className="barlow-extrabold">{pizzaBasePrice}₺</p>
+        <p>{pizzaBasePrice}₺</p>
         <p>4.9 (200)</p>
       </PizzaInfo>
-      <PizzaText className="barlow-light">
+      <PizzaText>
         Frontend Dev olarak hala position: absolute kullanıyorsan, bu çok acı
         pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer
         malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir

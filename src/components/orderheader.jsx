@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 const Header = styled.header`
-  background-color: #CE2829;
+  background-color: #ce2829;
   padding: 20px 50px;
   display: flex;
-  align-items: center; 
+  align-items: center;
   position: relative;
-  height: 100px; 
+  height: 100px;
 `;
 
 const Image = styled.img`
@@ -21,8 +21,8 @@ const Image = styled.img`
 const Nav = styled.nav`
   display: flex;
   position: absolute;
-  right: 57%; 
-  bottom: 15px; 
+  right: 57%;
+  bottom: 15px;
 `;
 
 const StyledNavLink = styled.span`
@@ -33,28 +33,24 @@ const StyledNavLink = styled.span`
   font-weight: lighter;
   `;
 
-  
-export default function OrderHeader () {
-
-    const history = useHistory(); //useHistory hooku ile sayfalar arasında yönlendirme yapılacak
-
+export default function OrderHeader() {
+  const history = useHistory();
 
   const handleAnasayfa = () => {
-    history.push('/home');  // Anasayfaya yönlendirme yapılıyor
+    history.push("/home");
   };
 
   const handleOrder = () => {
-    history.push('/order'); // order.jsx sayfasına yönlendirme yapılıyor
+    history.push("/order");
   };
 
-
-    return (
-        <Header>
-            <Image src={Logo} alt="Teknolojik Yemekler Logo"/> 
-            <Nav>
-                <StyledNavLink  onClick={handleAnasayfa}>Anasayfa - </StyledNavLink>
-                <StyledNavLink  onClick={handleOrder}> Sipariş Oluştur </StyledNavLink>
-            </Nav>
-        </Header>
-    )
+  return (
+    <Header>
+      <Image src={Logo} alt="Teknolojik Yemekler Logo" />
+      <Nav>
+        <StyledNavLink onClick={handleAnasayfa}>Anasayfa - </StyledNavLink>
+        <StyledNavLink onClick={handleOrder}> Sipariş Oluştur </StyledNavLink>
+      </Nav>
+    </Header>
+  );
 }

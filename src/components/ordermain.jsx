@@ -3,7 +3,7 @@ import OrderInfo from "./orderinfo";
 import OrderOptions from "./OrderOptions";
 import PizzaToppings from "./PizzaToppings";
 import OrderNote from "./OrderNote";
-import OrderCounter from "./ordercounter";
+import OrderCounter from "./orderCounter";
 import OrderSummary from "./ordersummary";
 
 const Container = styled.div`
